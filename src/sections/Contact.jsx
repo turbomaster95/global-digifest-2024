@@ -22,15 +22,14 @@ const Contact = () => {
         setLoading(true);
 
         try {
-            emailjs.send('service_n38yccv', 'template_ap4bopw',
+            emailjs.send('coderrrrr', 'template_84nbitv',
                 {
                     from_name: form.email,
-                    to_name: 'Anurag',
+                    to_name: 'Deva',
                     from_email: form.email,
-                    to_email: 'ak0375451@gmail.com',
+                    to_email: 'admin@coderrrrr.site',
                     message: form.message,
                 },
-                'qu7ft7frnW5d3tlVT'
             )
 
             setLoading(false);
