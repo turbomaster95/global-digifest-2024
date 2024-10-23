@@ -1,1 +1,1 @@
-# global-digifest-2024
+# Global Digifest 2024
