@@ -27,7 +27,7 @@ export default function Scene() {
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} />
           <HeroCamera isMobile={false}>
-            <Model position={sizes.deskPosition} />
+            <Model position={10, 0.5, 0.5} />
           </HeroCamera>
       {/* </Suspense> */}
     </Canvas>
