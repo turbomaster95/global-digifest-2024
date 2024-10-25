@@ -1,22 +1,17 @@
-import Navbar from './sections/Navbar';
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Projects from './sections/Projects';
-import Clients from './sections/Clients';
-import Contact from './sections/Contact';
-import Footer from './sections/Footer';
-import Experience from './sections/Experience';
+import React, { Suspense, lazy } from 'react';
+import Navbar from '@/components/Navbar';
+import CanvasLoader from '@/components/CanvasLoader';
+import ErrorBoundary from './components/ErrorBoundary';
 
-const App = () => {
+const Scene = lazy(() => import('@/components/Scene'));
+
+export default function App() {
   return (
-    <main className='max-w-7xl mx-auto'>
-      <Navbar />
-      <Hero />
-      <About />
-      <Contact />
-      <Footer />
-    </main>
-  )
+    <ErrorBoundary>
+        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+            <Navbar />
+            <Scene />
+        </div>
+    </ErrorBoundary>
+  );
 }
-
-export default App;
