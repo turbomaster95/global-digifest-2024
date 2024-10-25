@@ -22,13 +22,13 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl">
+        <div className="flex items-center mx-7 justify-between h-16">
           <div className="flex-shrink-0">
             <a href="/" className="text-2xl font-bold text-gray-900 dark:text-white">👨‍💻Coderrrrr.site</a>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-0 flex sm:px-2 items-baseline space-x-4">
+          <div className="hidden md:flex md:flex-grow md:justify-center mx-0.5"> {/* Center the links */}
+            <div className="flex space-x-4">
               {navItems.map((item, index) => (
                 <Link
                   key={index}
