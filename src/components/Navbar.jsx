@@ -52,7 +52,7 @@ export default function Navbar() {
                 <Moon className="h-6 w-6" aria-hidden="true" />
               )}
             </button>
-            <div className="md:hidden ml-4">
+            <div className="md:hidden ml-4">z
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"

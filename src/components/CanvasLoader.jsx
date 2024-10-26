@@ -1,7 +1,16 @@
-import { Html, useProgress } from "@react-three/drei"
+import { Html, useProgress } from "@react-three/drei";
+import { Progress } from "@/components/ui/progress";
+import { useEffect } from "react";
 
-const CanvasLoader = () => {
-    const { progress } = useProgress()
+const CanvasLoader = ({ setModelLoaded }) => {
+    const { progress } = useProgress();
+
+    useEffect(() => {
+        // Trigger setModelLoaded(true) when progress reaches 100%
+        if (progress === 100) {
+            setModelLoaded(true);
+        }
+    }, [progress, setModelLoaded]);
 
     return (
         <Html
@@ -15,17 +24,18 @@ const CanvasLoader = () => {
             }}
         >
             <span className="canvas-loader" />
+            <Progress value={progress} className="bg-white w-60" />
             <p style={{
                 fontSize: 14,
-                color: '#000000',
+                color: '#ffffff',
                 fontWeight: 600,
                 marginTop: 40,
                 width: '100%'
             }}>
-                {progress !== 0 ? `${progress.toFixed(2)}%` : 'Loading...'}
+                {progress !== 0 ? `${progress.toFixed(0)}%` : 'Loading...'}
             </p>
         </Html>
-    )
-}
+    );
+};
 
-export default CanvasLoader
+export default CanvasLoader;

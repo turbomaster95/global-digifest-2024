@@ -5,8 +5,8 @@ import './index.css';
 import App from './App';
 import Scene from '@/components/Scene';
 import About from '@/components/About';
-import PageNotFound from '@/components/404';
 import { useGLTF } from '@react-three/drei';
+import Projects from '@/components/Projects';
 
 // Preload the model
 useGLTF.preload('/boizroom-transformed.glb');
@@ -18,11 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route exact path="/" element={<App />} /> 
         <Route path="/home" element={<App />} />
         <Route exact path="/about" element={<About />} />
-        <Route exact path="/scene" element={<Scene />} />
-        <Route
-               path="*"
-               element={<PageNotFound />}
-                />
+        <Route exact path="/projects" element={<Projects />} />
       </Routes>
     </Router>
   </StrictMode>

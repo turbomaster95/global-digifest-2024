@@ -1,0 +1,54 @@
+/* this demo has external styles added in the settings */
+/* https://codepen.io/GreenSock/pen/xxmzBrw?editors=1100 */
+
+.box.active {
+    outline: 5px dashed var(--color-surface-white);
+  }
+  
+  
+  body {
+    background-color: var(--color-just-black);
+    background-image:
+      linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(255,255,255,.07) 2px, transparent 2px),
+      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  }
+  
+  .box {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 100px;
+    z-index: 100;
+  }
+  
+  .a {
+    top: 200px;
+  }
+  
+  .b {
+    top: 800px;
+  }
+  
+  .c {
+    top: 1000px;
+  }
+  
+  .ghost {
+    top: 1000px;
+    background-color: #444;
+  }
+  
+  .line {
+    width: 2px;
+    height: 3000px;
+    position: absolute;
+    left: 600px;
+    top: 0px;
+  /*   visibility: hidden; */
+    background-color: #777;
+  }
+  
