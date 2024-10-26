@@ -6,7 +6,17 @@ export default {
   ],
   darkMode: 'class', // This enables dark mode
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'dotted-pattern': "radial-gradient(circle, rgba(0, 0, 0, 0.2) 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        '20': '20px 20px',
+      },
+    },
+    animation: {
+      "spin-slow": "spin 8s linear infinite",
+    },
   },
   plugins: [],
 }

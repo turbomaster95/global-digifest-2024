@@ -2,88 +2,103 @@ import Navbar from '@/components/Navbar';
 import ErrorBoundary from './components/ErrorBoundary';
 import { gsap } from "gsap";
 import Scene from '@/components/Scene';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useState, useRef } from 'react';
+import PreLoading from '@/components/Loader'; // Import your PreLoading component
+import StaggeredText from './components/effects/StaggeredText';
+import PopupText from './components/effects/PopupText';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { useEffect, useRef, useState } from 'react';
-
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function App() {
-  const [modelLoaded, setModelLoaded] = useState(false);
-  const tl = useRef(gsap.timeline({ paused: true }));
-  const cRef = useRef(null);
-  const lettersRef = useRef(null);
-
-  const handleModelLoaded = () => {
-    setModelLoaded(true); // Trigger re-render
-  };
+  const [lolo, setLolo] = useState(false);
+  const [count, setCount] = useState(10);
+  const initialTimeline = useRef(gsap.timeline({ paused: true }));
+  const [setIsPreloading] = useState(true);
 
   useEffect(() => {
-    if (modelLoaded) {
-      // Initial animation for all letters
-      tl.current
+    // Set a timeout to change the state of `lolo` after 2 seconds
+    const timer = setTimeout(() => {
+      setLolo(true); // Set `lolo` to true to start the animation
+    }, 5000); // 2000 milliseconds = 2 seconds
+
+    // Cleanup function to clear the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array means this effect runs once on mount
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setCount((prev) => {
+        if (prev === 0) {
+          clearInterval(timer);
+          return 0;
+        } else return prev - 1;
+      });
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    gsap.to(window, {
+      duration: 0.2,       // duration of scroll in seconds
+      scrollTo: 0,       // scroll position (0 = top)
+    });
+  })
+
+  useEffect(() => {
+    // Disable scroll on mount
+    document.body.style.overflow = "hidden";
+
+    // Simulate loading completion or tie this to actual loading logic
+    const timer = setTimeout(() => {
+      setIsPreloading(false);
+      document.body.style.overflow = ""; // Restore scroll
+    }, 5000); // Replace 5000 with actual loading duration
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = ""; // Cleanup overflow in case of unmount
+    };
+  }, []);
+
+  useEffect(() => {
+    const startAnimation = () => {
+      initialTimeline.current
         .from(".letter", {
           yPercent: "random([-100, 100])",
           opacity: 0,
-          duration: 2,
+          filter: "blur(10px)", // Start with blur effect
+          duration: 2.5,
           stagger: 0.1,
-          ease: "back.out",
         })
-        .to(
-          lettersRef.current,
-          { y: -window.innerHeight, duration: 2, ease: "power2.out" },
-          "+=1" // Delay to allow letters to stay on-screen briefly
-        )
+        .to(".letter", { filter: "blur(0px)", duration: 0.5 }, "-=1.5")
         .play();
+    };
+
+    if (lolo) {
+      startAnimation(); // Start animation when `lolo` is true
     }
-  }, [modelLoaded]);
+  }, [lolo]); // Runs when `lolo` changes
 
   useEffect(() => {
-    // Separate scroll trigger only for "C" element
-    if (modelLoaded) {
-      ScrollTrigger.create({
-        trigger: cRef.current,
-        start: "top center",
-        end: "bottom+=500 center",
-        scrub: true,
-        onEnter: () => {
-          gsap.to(cRef.current, {
-            y: 500,
-            duration: 1,
-            ease: "power2.inOut",
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(cRef.current, {
-            y: 0,
-            duration: 1,
-            ease: "power2.inOut",
-          });
-        },
-      });
-    }
-  }, [modelLoaded]);
-
-  useEffect(() => {
-    // Prevent default scroll behavior to avoid issues
     const preventScroll = (event) => event.preventDefault();
     document.addEventListener('wheel', preventScroll);
     return () => document.removeEventListener('wheel', preventScroll);
   }, []);
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <PreLoading count={count} />
         <Navbar />
-        <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-          {/* Pass handleModelLoaded to Scene to notify when loading completes */}
-          <Scene setModelLoaded={handleModelLoaded} style={{ zIndex: -1 }} />
 
-          {/* Conditionally render text only after model is fully loaded */}
-          {modelLoaded && (
+        <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+          
+          {/* Conditionally render the PreLoading or the text */}
+          {count > 0 ? (
+              // <PreLoading count={count} />
+              console.log("✨✨")
+          ) : (
             <h1
               className="absolute inset-0 flex justify-center items-center hedr text-black dark:text-white"
-              ref={lettersRef}
               style={{
                 fontSize: '16vw',
                 margin: 0,
@@ -93,7 +108,7 @@ export default function App() {
                 pointerEvents: 'none',
               }}
             >
-              <span ref={cRef} className="letter">C</span>
+              <span className="letter">C</span>
               <span className="letter">o</span>
               <span className="letter">d</span>
               <span className="letter">e</span>
@@ -109,6 +124,13 @@ export default function App() {
               <span className="letter">e</span>
             </h1>
           )}
+        </div>
+        <div className='content'>
+          <div className="flex items-center justify-center min-h-screen text-black dark:text-white">
+            <PopupText>
+                <p>You can customize the animations and styles further based on your requirements...</p>
+            </PopupText>
+          </div>
         </div>
       </div>
     </ErrorBoundary>

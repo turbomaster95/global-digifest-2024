@@ -3,10 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Scene from '@/components/Scene';
 import About from '@/components/About';
 import { useGLTF } from '@react-three/drei';
 import Projects from '@/components/Projects';
+import Contact from '@/components/Contact';
 
 // Preload the model
 useGLTF.preload('/boizroom-transformed.glb');
@@ -19,6 +19,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/home" element={<App />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/projects" element={<Projects />} />
+        <Route exact path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   </StrictMode>
