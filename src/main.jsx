@@ -11,6 +11,8 @@ import Contact from '@/components/Contact';
 // Preload the model
 useGLTF.preload('/boizroom-transformed.glb');
 
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
