@@ -15,7 +15,7 @@ export default function Scene({ setModelLoaded }) {
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
 
   return (
-    <Canvas style={{ height: 'calc(100vh - 64px)', width: '100vw' }}>
+    <Canvas style={{ height: '100%', width: '100%' }}>
       {/* Pass setModelLoaded to CanvasLoader to notify App when loading is complete */}
       <Suspense fallback={<CanvasLoader setModelLoaded={setModelLoaded} />}>
         <ambientLight intensity={1} />

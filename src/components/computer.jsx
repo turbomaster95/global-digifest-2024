@@ -1,6 +1,13 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import { useGLTF } from '@react-three/drei';
 
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
 
 export const Model = forwardRef((props, ref) => {
   const { nodes, materials } = useGLTF('/boizroom-transformed.glb');
