@@ -17,6 +17,8 @@ import { useMediaQuery } from 'react-responsive';
 import AboutH from './components/AboutH';
 import InteractiveStars from './components/Cursor';
 import Footer from './components/Footer';
+import SocialLinks from './components/SocialLinks';
+import Contact from './components/Contact';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -193,24 +195,29 @@ export default function App() {
               <AboutH />
               </section>
             </div>
-            
-              
-            
-            <div className="flex items-center flex-col justify-center ml-0 text-black dark:text-white">
-              <br />
-              <br />
-              <br />
-              <br />
-              <StaggeredText>
-                <p className='mb-10'>PROJECTS</p>
-              </StaggeredText>
-              <br />
-              <br />
-              <br />
-              <br />
-            </div>
-            <CarProjects />
           </div>
+          <section id="projects" className="section-class">
+            <div className="flex items-center flex-col justify-center ml-0 text-black dark:text-white">
+                <br />
+                <br />
+                <br />
+                <br />
+                <StaggeredText>
+                  <p className='mb-10'>PROJECTS</p>
+                </StaggeredText>
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>    
+            <CarProjects />
+            <br />
+            <br />
+          </section>
+          <br />
+          <br />
+          <Contact />
+          <SocialLinks />
           <Footer />
         </div>
       </ErrorBoundary>

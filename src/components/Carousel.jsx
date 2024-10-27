@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Card } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -26,6 +25,7 @@ const ProjectsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
 
+  // Animation effect for slide changes
   useEffect(() => {
     if (carouselRef.current) {
       gsap.fromTo(
@@ -35,6 +35,17 @@ const ProjectsCarousel = () => {
       );
     }
   }, [currentIndex]);
+
+  // Handle automatic slide transition every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 1500); // 3-second interval
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, []);
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
@@ -47,7 +58,7 @@ const ProjectsCarousel = () => {
       prevIndex === projects.length - 1 ? 0 : prevIndex + 1
     );
   };
-
+  
   return (
     <div className="relative w-full max-w-4xl mx-auto p-4">
       <Card
