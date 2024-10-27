@@ -7,14 +7,14 @@ import About from '@/components/About';
 import { useGLTF } from '@react-three/drei';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
+import InteractiveStars from './components/Cursor';
 
 // Preload the model
 useGLTF.preload('/boizroom-transformed.glb');
 
-
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <InteractiveStars />
     <Router>
       <Routes>
         <Route exact path="/" element={<App />} /> 

@@ -13,12 +13,12 @@ const projects = [
   {
     title: 'Obstacle Avoiding Robotic Car',
     description: 'An Obstacle Avoiding Robotic Car uses an Arduino Uno R4 WiFi, IR sensor, and L293D motor driver to autonomously navigate by detecting obstacles and adjusting its path. The IR sensor identifies nearby objects, while the Arduino processes this data to control the motors via the L293D driver, steering the car around obstacles.',
-    image: 'https://via.placeholder.com/300',
+    image: 'https://i.ytimg.com/vi/uAgK1pEAN0Y/maxresdefault.jpg',
   },
   {
     title: 'Coderrrrr.site',
     description: 'This website you are currently on. It is my personal website that showcases my projects and skills. It was built using Next.js, Tailwind CSS, and Framer Motion.',
-    image: 'https://via.placeholder.com/300',
+    image: '/image.png',
   },
 ];
 

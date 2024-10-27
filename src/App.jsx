@@ -15,6 +15,8 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { calculateSizes } from '@/lib/const';
 import { useMediaQuery } from 'react-responsive';
 import AboutH from './components/AboutH';
+import InteractiveStars from './components/Cursor';
+import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -32,7 +34,7 @@ export default function App() {
     // Update lolo state for animation after 5 seconds
     const loloTimer = setTimeout(() => {
       setLolo(true);
-    }, 7000);
+    }, 5000);
 
     return () => clearTimeout(loloTimer);
   }, []);
@@ -93,16 +95,16 @@ export default function App() {
   useEffect(() => {
     const startAnimation = () => {
       initialTimeline.current
-      // Remove the `hidden` class to unhide the elements before animation starts
-      .set(".letter", { className: "letter", visibility: "visible" }) 
-      .from(".letter", {
-        yPercent: "random([-120, 120])",
-        opacity: 0,
-        filter: "blur(10px)",
-        duration: 2,
-        stagger: 0.1,
+        .set(".letter", { className: "letter", visibility: "visible" })
+        .from(".letter", {
+          yPercent: "random([-120, 120])",
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 2,
+          stagger: 0.1,
+          onStart: () => console.log("Animation start"),
       })
-      .to(".letter", { filter: "blur(0px)", duration: 0.5 }, "-=1.5")
+      .to(".letter", { filter: "blur(0px)", duration: 0.5, onComplete: () => console.log("Animation end") }, "-=1.5")
       .play();
     };
 
@@ -116,20 +118,21 @@ export default function App() {
   }, [lolo]);
   useEffect(() => {
     // Ensure the script runs after the component mounts
-    const script = document.createElement('script');
-    script.src = '/oneko.js'; // Path to your oneko.js file
-    script.async = true;
-    document.body.appendChild(script);
+    // const script = document.createElement('script');
+    // script.src = '/oneko.js'; // Path to your oneko.js file
+    // script.async = true;
+    // document.body.appendChild(script);
 
     // Cleanup function to remove the script when component unmounts
     return () => {
-      document.body.removeChild(script);
+      // document.body.removeChild(script);
     };
   }, []);
 
   return (
     <Lenis root>
       <ErrorBoundary className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <InteractiveStars />
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
           <PreLoading count={count} />
           <Navbar />
@@ -183,9 +186,14 @@ export default function App() {
               </Canvas> */}
             </div>
             <AboutH />
+            <div className="flex items-center flex-col justify-center ml-0 text-black dark:text-white">
+              <StaggeredText>
+                <p>Projects </p>
+              </StaggeredText>
+            </div>
             <CarProjects />
           </div>
-          
+          <Footer />
         </div>
       </ErrorBoundary>
     </Lenis>
