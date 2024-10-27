@@ -1,23 +1,21 @@
+import { GitHubLogoIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
 import React from 'react';
+import { FaMastodon } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6">
+    <footer className="bg-gray-800 text-white pt-6">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex space-x-6">
-          <a href="#about" className="hover:underline">About</a>
-          <a href="#services" className="hover:underline">Services</a>
-          <a href="#contact" className="hover:underline">Contact</a>
-          <a href="#privacy" className="hover:underline">Privacy Policy</a>
-        </div>
         <div className="flex space-x-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Facebook</a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Twitter</a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Instagram</a>
+          <a href="https://github.com/turbomaster95" target="_blank" rel="noopener noreferrer" className=""><GitHubLogoIcon /></a>
+          <a href="https://mastodon.social/@coderrrrr" target="_blank" rel="noopener noreferrer" className=""><FaMastodon /></a>
+          <a href="https://instagram.com/coderrrrr.site/" target="_blank" rel="noopener noreferrer" className="hover:underline"><InstagramLogoIcon /></a>
+          <a href="https://instagram.com/coderrrrr.site/" target="_blank" rel="noopener noreferrer" className="hover:underline"><FaXTwitter /></a>
         </div>
       </div>
-      <div className="text-center mt-4">
-        <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+      <div className="text-center pb-6">
+        <p>&copy; {new Date().getFullYear()} Deva Midhun. All rights reserved.</p>
       </div>
     </footer>
   );
