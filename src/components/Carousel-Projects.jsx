@@ -1,30 +1,25 @@
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
+// import {
+//     Carousel,
+//     CarouselContent,
+//     CarouselItem,
+//     CarouselNext,
+//     CarouselPrevious,
+// } from "@/components/ui/carousel"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Carousel } from 'nuka-carousel';
 
 export default function CarProjects() {
-    return (
-        <Carousel className="w-full max-w-xs justify-center">
-          <CarouselContent>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">{index + 1}</span>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+  return (
+    <div className="w-2xl dark:text-white text-black">
+        <Carousel showArrows autoplay={true} autoplayInterval={3000} wrapMode="wrap" className="w-screen">
+          <Card>
+            <CardTitle>
+              <CardHeader>Dotmastr</CardHeader>
+            </CardTitle>
+            <CardContent></CardContent>
+          </Card>
+
         </Carousel>
-      )
+    </div>
+  );
 }
