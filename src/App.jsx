@@ -8,6 +8,12 @@ import StaggeredText from './components/effects/StaggeredText';
 import PopupText from './components/effects/PopupText';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Lenis, useLenis } from '@studio-freight/react-lenis';
+import CarProjects from './components/Carousel-Projects';
+import Cube from './components/Cube';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { calculateSizes } from '@/lib/const';
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -16,7 +22,11 @@ export default function App() {
   const [count, setCount] = useState(10);
   const initialTimeline = useRef(gsap.timeline({ paused: true }));
   const [isPreloading, setIsPreloading] = useState(true);
+  const isSmall = useMediaQuery({ maxWidth: 440 });
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
 
+  const sizes = calculateSizes(isSmall, isMobile, isTablet);
   useEffect(() => {
     // Update lolo state for animation after 5 seconds
     const loloTimer = setTimeout(() => {
@@ -27,24 +37,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // Countdown timer for PreLoading component
-    const countdownTimer = setInterval(() => {
-      setCount((prev) => {
-        if (prev === 0) {
-          clearInterval(countdownTimer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 2000);
-  }, []);
-
-  // Scroll to top initially and handle smooth scrolling
-  useLenis();
-
-  useEffect(() => {
     gsap.to(window, {
-      duration: 0.2,
+      duration: 0.1,
       scrollTo: 0,
     });
   }, []);
@@ -70,31 +64,53 @@ export default function App() {
     return () => unlockScroll();
   }, [isPreloading]);
 
-  // Simulate loading time
   useEffect(() => {
-    const preloadingTimer = setTimeout(() => {
-      setIsPreloading(false);
-    }, 100);
-
-    return () => clearTimeout(preloadingTimer);
+    // Countdown timer for PreLoading component
+    const countdownTimer = setInterval(() => {
+      setCount((prev) => {
+        if (prev === 0) {
+          clearInterval(countdownTimer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
   }, []);
+
+  // Handle smooth scrolling
+  useLenis();
+
+  // // Simulate loading time
+  // useEffect(() => {
+  //   const preloadingTimer = setTimeout(() => {
+  //     setIsPreloading(false);
+  //   }, 50);
+
+  //   return () => clearTimeout(preloadingTimer);
+  // }, []);
 
   useEffect(() => {
     const startAnimation = () => {
       initialTimeline.current
-        .from(".letter", {
-          yPercent: "random([-100, 100])",
-          opacity: 0,
-          filter: "blur(10px)",
-          duration: 2.5,
-          stagger: 0.1,
-        })
-        .to(".letter", { filter: "blur(0px)", duration: 0.5 }, "-=1.5")
-        .play();
+      // Remove the `hidden` class to unhide the elements before animation starts
+      .set(".letter", { className: "letter", visibility: "visible" }) 
+      .from(".letter", {
+        yPercent: "random([-120, 120])",
+        opacity: 0,
+        filter: "blur(10px)",
+        duration: 2,
+        stagger: 0.1,
+      })
+      .to(".letter", { filter: "blur(0px)", duration: 0.5 }, "-=1.5")
+      .play();
     };
 
     if (lolo) {
       startAnimation();
+      setTimeout(() => {
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+      })
     }
   }, [lolo]);
 
@@ -102,7 +118,7 @@ export default function App() {
     <Lenis root>
       <ErrorBoundary className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-          {isPreloading && <PreLoading count={count} />}
+          <PreLoading count={count} />
           <Navbar />
 
           <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
@@ -111,41 +127,50 @@ export default function App() {
               console.log("✨ Preloading... ✨")
             ) : (
               <h1
-                className="absolute inset-0 flex justify-center items-center hedr text-black dark:text-white"
+                className="absolute inset-0 flex items-center hedr text-black dark:text-white"
                 style={{
                   fontSize: '16vw',
-                  margin: 0,
-                  lineHeight: 1,
+                  margin: 1.5,
+                  lineHeight: 0.5,
                   fontWeight: 600,
                   zIndex: 1,
                   pointerEvents: 'none',
                 }}
               >
-                <span className="letter">C</span>
-                <span className="letter">o</span>
-                <span className="letter">d</span>
-                <span className="letter">e</span>
-                <span className="letter">r</span>
-                <span className="letter">r</span>
-                <span className="letter">r</span>
-                <span className="letter">r</span>
-                <span className="letter">r</span>
-                <span className="letter">.</span>
-                <span className="letter">s</span>
-                <span className="letter">i</span>
-                <span className="letter">t</span>
-                <span className="letter">e</span>
+                <span className="hidden letter">C</span>
+                <span className="hidden letter">o</span>
+                <span className="hidden letter">d</span>
+                <span className="hidden letter">e</span>
+                <span className="hidden letter">r</span>
+                <span className="hidden letter">r</span>
+                <span className="hidden letter">r</span>
+                <span className="hidden letter">r</span>
+                <span className="hidden letter">r</span>
+                <span className="hidden letter">.</span>
+                <span className="hidden letter">s</span>
+                <span className="hidden letter">i</span>
+                <span className="hidden letter">t</span>
+                <span className="hidden letter">e</span>
               </h1>
             )}
           </div>
 
           <div className="content">
             <div className="flex items-center justify-center min-h-screen text-black dark:text-white">
-              <PopupText>
-                <p>You can customize the animations and styles further based on your requirements...</p>
-              </PopupText>
+              <img src="/404-poodle.png" alt="404 Poodle" className="w-80 ml-16 align-middle" />
+              <StaggeredText>
+                <p>Building   Interactive   Experiences   for   the   Web.</p>
+              </StaggeredText>
+              <Canvas style={{ height: '500px', width: '500px' }}>
+                  <PerspectiveCamera makeDefault position={[0, 0, 20]} />
+                  <Cube position={sizes.cubePosition} />
+                  <ambientLight intensity={1} />
+                  <directionalLight position={[10, 10, 10]} intensity={0.5} />
+                  <OrbitControls />
+                </Canvas>
             </div>
           </div>
+          <CarProjects />
         </div>
       </ErrorBoundary>
     </Lenis>

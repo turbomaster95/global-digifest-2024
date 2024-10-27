@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Moon, Sun, Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 
 const navItems = ['Home', 'About', 'Projects', 'Contact']
 
@@ -16,26 +17,41 @@ export default function Navbar() {
     }
   }, [darkMode])
 
+  useEffect(() => {
+    gsap.from(".navbas", {
+      opacity: 0,
+      filter: "blur(10px)",
+      duration: 2,
+    }) // "-=1.5" means start this animation 1.5 seconds before the previous one ends
+  }, []);
+
+  setTimeout(() => {
+    gsap.to(".navbas", { 
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: 0.5 
+    });
+  }, 8000);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
 
   return (
-    <nav className="bg-white dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl">
-        <div className="flex items-center mx-7 justify-between h-16">
+    <nav className="bg-white dark:bg-gray-900 transition-colors duration-300 navbas ">
+      <div className="max-w-8xl bg-gray-700">
+        <div className="flex items-center mx-7 justify-between h-16 ">
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-bold text-gray-900 dark:text-white">👨‍💻Coderrrrr.site</a>
+            <a href="/" className="text-2xl font-bold text-gray-900 dark:text-white ">👨‍💻Coderrrrr.site</a>
           </div>
-          <div className="hidden md:flex md:flex-grow md:justify-center mx-0.5"> {/* Center the links */}
+          <div className="hidden md:flex md:flex-grow md:justify-center mx-0 "> {/* Center the links */}
             <div className="flex space-x-4">
               {navItems.map((item, index) => (
                 <Link
                   key={index}
                   to={`/${item.toLowerCase()}`}
-                  className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  className="text-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-bold "
                 >
-                  {item}
+                  {item.toUpperCase()}
                 </Link>
               ))}
             </div>
@@ -43,7 +59,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              className="p-1 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
             >
               <span className="sr-only">Toggle dark mode</span>
               {darkMode ? (

@@ -2,7 +2,7 @@ import React from "react";
 import StarSpin from "@/components/StarSpin";
 import { motion, AnimatePresence, easeInOut } from "framer-motion";
 import "/fonts/SpectralBridgeRegular-ZVmGm.otf" 
-
+import "../App.css";
 
 function PreLoading({ count }) { // Removed the TypeScript type annotation for count
   const name = "Deva";
@@ -52,13 +52,13 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
     <AnimatePresence>
       {count > 4 && (
         <motion.section
-          className="z-[100] relative bg-lightBg dark:bg-darkBg w-full h-screen flex items-end justify-center overflow-hidden"
+          className="z-[100] relative dark:text-white w-full h-screen flex items-end justify-center overflow-hidden"
         >
           {name.split("").map((nom, i) => {
             return name[i] === "a" ? (
               <div
                 key={`${nom}_${i}`}
-                className="flex flex-col items-center justify-center gap-y-[10vh] lg:gap-y-[10vh]"
+                className="flex flex-col items-center justify-center gap-y-[20vh] lg:gap-y-[10vh]"
               >
                 <motion.div
                   variants={starVariant}
@@ -86,7 +86,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
                       ease: [0.65, 0, 0.35, 1],
                     },
                   }}
-                  className={`uppercase text-[29.5vw] leading-[.85] tracking-tight mb-[-.2em]`}
+                  className={`uppercase text-[29.5vw] leading-[.85] tracking-tight mb-[-.2em] font-spectral-bridge`}
                 >
                   {nom}
                 </motion.p>
@@ -110,7 +110,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
                       ease: [0.65, 0, 0.35, 1],
                     },
                   }}
-                  className={`uppercase text-[29.5vw] leading-[.85] tracking-tight mb-[-.2em]`}
+                  className={`uppercase text-[29.5vw] leading-[.85] tracking-tight mb-[-.2em] font-spectral-bridge`}
                 >
                   {nom}
                 </motion.p>

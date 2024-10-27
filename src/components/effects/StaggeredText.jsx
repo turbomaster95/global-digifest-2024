@@ -42,8 +42,8 @@ const StaggeredText = ({ children }) => {
           }}
           initial="initial"
           animate={isVisible ? "animate" : "initial"} // Animate when visible
-          transition={{ duration: 0.6, delay: index * 0.03 }} // Stagger effect
-          className="text-3xl font-bold"
+          transition={{ duration: 0.6, delay: index * 0.02 }} // Stagger effect
+          className="text-3xl ml-16 font-bold"
         >
           {char}
         </motion.span>
