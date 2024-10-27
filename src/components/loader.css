@@ -1,0 +1,4 @@
+.loader {
+    position: relative;
+    top: -200px; /* Adjust this value to control how far up it moves */
+}

@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import Globe from 'react-globe.gl';
+import { FaDiscord } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
 
 const ContactCard = () => {
     const globeRef = useRef(null);
@@ -122,13 +124,15 @@ const ContactCard = () => {
                     className="w-full sm:w-1/3"
                 >
                     <Card className="bg-gray-800 p-4 rounded-md">
-                        <h3 className="text-lg font-semibold">Contact me at</h3>
-                        <a
-                            href="mailto:admin@coderrrrr.site"
-                            className="text-blue-400 underline mt-1 block"
-                        >
-                            admin@coderrrrr.site
-                        </a>
+                        <h3 className="text-lg font-semibold">Email me at: <br /></h3>
+                        <Button asChild className="mt-4 shadow-sm hover:shadow-lg hover:bg-white hover:text-black border border-gray-500 ">
+                            <a
+                                href="mailto:admin@coderrrrr.site"
+                                className=" mt-1 block"
+                            >
+                                <Mail />admin@coderrrrr.site
+                            </a>
+                        </Button>
                     </Card>
                 </motion.div>
                 
@@ -146,7 +150,7 @@ const ContactCard = () => {
                             I'm based in India and can work remotely for anyone in the world.
                         </p>
                         <Button asChild className="mt-4 shadow-sm hover:shadow-lg hover:bg-white hover:text-black border border-gray-500 ">
-                            <a href="https://discordapp.com/users/765881288740569088">Contact Me</a>
+                            <a href="https://discordapp.com/users/765881288740569088" target="_blank" rel="noopener noreferrer"><FaDiscord />Contact Me</a>
                         </Button>
                         <div className='rounded-3xl w-full sm:h-[326px] flex justify-center items-center h-fit'>
                             <Globe

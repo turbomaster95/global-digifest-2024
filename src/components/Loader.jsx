@@ -1,11 +1,11 @@
 import React from "react";
 import StarSpin from "@/components/StarSpin";
 import { motion, AnimatePresence, easeInOut } from "framer-motion";
-import "/fonts/SpectralBridgeRegular-ZVmGm.otf" 
 import "../App.css";
+import "./loader.css";
 
 function PreLoading({ count }) { // Removed the TypeScript type annotation for count
-  const name = "Deva";
+  const name = "DevaㅤMidhun";
   const EASING = [0.83, 0, 0.17, 1];
 
   const bgVariant = {
@@ -55,7 +55,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
           className="z-[100] relative dark:text-white w-full h-screen flex items-end justify-center overflow-hidden"
         >
           {name.split("").map((nom, i) => {
-            return name[i] === "a" ? (
+            return name[i] === "i" ? (
               <div
                 key={`${nom}_${i}`}
                 className="flex flex-col items-center justify-center gap-y-[20vh] lg:gap-y-[10vh]"
@@ -65,6 +65,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
                   initial="initial"
                   animate="animate"
                   exit="exit"
+                  className="loader"
                 >
                   <StarSpin classNameSize="w-[15vw] sm:w-[12vw] lg:w-[7vw]" className="animate-spin-slow" />
                 </motion.div>
@@ -86,7 +87,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
                       ease: [0.65, 0, 0.35, 1],
                     },
                   }}
-                  className={`uppercase text-[29.5vw] leading-[.85] tracking-tight mb-[-.2em] font-spectral-bridge`}
+                  className={`uppercase text-[10.5vw] leading-[.85] tracking-tight mb-[-.2em] font-spectral-extrabold loader`}
                 >
                   {nom}
                 </motion.p>
@@ -110,7 +111,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
                       ease: [0.65, 0, 0.35, 1],
                     },
                   }}
-                  className={`uppercase text-[29.5vw] leading-[.85] tracking-tight mb-[-.2em] font-spectral-bridge`}
+                  className={`uppercase text-[10.5vw] leading-[.85] tracking-tight mb-[-.2em] font-spectral-extrabold loader`}
                 >
                   {nom}
                 </motion.p>

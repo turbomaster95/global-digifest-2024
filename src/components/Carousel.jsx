@@ -8,7 +8,7 @@ const projects = [
   {
     title: 'Dotmastr',
     description: 'A simple cross-platform dotfiles manager. Dotfiles are hidden configuration files in Unix-based systems (e.g., .bashrc, .vimrc) that store user settings and preferences for applications, allowing for customized environments across shells, editors, and more. A dotfiles manager streamlines tracking and syncing configurations across devices, automating setup to ensure a consistent environment with ease.',
-    image: 'https://via.placeholder.com/300', // Placeholder image, replace with actual image URL
+    image: '/dotmastr-logo.png', // Placeholder image, replace with actual image URL
   },
   {
     title: 'Obstacle Avoiding Robotic Car',
@@ -60,7 +60,7 @@ const ProjectsCarousel = () => {
             {projects[currentIndex].title}
           </h3>
           <hr className="my-2 border-gray-600" />
-          <p className="text-white">{projects[currentIndex].description}</p>
+          <p className="text-white text-base">{projects[currentIndex].description}</p>
         </div>
 
         {/* Right Side - Image */}

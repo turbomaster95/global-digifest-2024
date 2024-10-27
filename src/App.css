@@ -5,6 +5,28 @@
     font-style: normal;
 }
 
+@font-face {
+  font-family: 'SpectralExtraBold';
+  src: url('/fonts/Spectral-ExtraBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlayfairDisplaySCRegular';
+  src: url('/PlayfairDisplaySC-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .font-spectral-bridge {
   font-family: 'SpectralBridge', sans-serif;
+}
+
+.font-spectral-extrabold {
+  font-family: 'SpectralExtraBold', sans-serif;
+}
+
+.font-playfair-displaysc-regular {
+  font-family: 'PlayfairDisplaySCRegular', sans-serif;
 }

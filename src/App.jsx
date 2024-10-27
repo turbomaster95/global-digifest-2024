@@ -132,51 +132,57 @@ export default function App() {
   return (
     <Lenis root>
       <ErrorBoundary className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        <InteractiveStars />
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
           <PreLoading count={count} />
           <Navbar />
 
           <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-            {/* Conditional rendering based on count */}
-            {count > 0 ? (
-              console.log("✨ Preloading... ✨")
-            ) : (
-              <h1
-                className="absolute inset-0 flex items-center hedr text-black dark:text-white"
-                style={{
-                  fontSize: '16vw',
-                  margin: 1.5,
-                  lineHeight: 0.5,
-                  fontWeight: 600,
-                  zIndex: 1,
-                  pointerEvents: 'none',
-                }}
-              >
-                <span className="hidden letter">C</span>
-                <span className="hidden letter">o</span>
-                <span className="hidden letter">d</span>
-                <span className="hidden letter">e</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">.</span>
-                <span className="hidden letter">s</span>
-                <span className="hidden letter">i</span>
-                <span className="hidden letter">t</span>
-                <span className="hidden letter">e</span>
-              </h1>
-            )}
+            <section id="home" className="section-class">
+              {/* Conditional rendering based on count */}
+              {count > 0 ? (
+                console.log("✨ Preloading... ✨")
+              ) : (
+                <h1
+                  className="absolute inset-0 flex items-center hedr text-black dark:text-white"
+                  style={{
+                    fontSize: '16vw',
+                    margin: 1.5,
+                    lineHeight: 0.5,
+                    fontWeight: 600,
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <span className="hidden letter">C</span>
+                  <span className="hidden letter">o</span>
+                  <span className="hidden letter">d</span>
+                  <span className="hidden letter">e</span>
+                  <span className="hidden letter">r</span>
+                  <span className="hidden letter">r</span>
+                  <span className="hidden letter">r</span>
+                  <span className="hidden letter">r</span>
+                  <span className="hidden letter">r</span>
+                  <span className="hidden letter">.</span>
+                  <span className="hidden letter">s</span>
+                  <span className="hidden letter">i</span>
+                  <span className="hidden letter">t</span>
+                  <span className="hidden letter">e</span>
+                </h1>
+              )}
+            </section>
           </div>
 
           <div className="content">
             <div className="flex items-center flex-col justify-center min-h-screen text-black dark:text-white">
               <img src="/keyboard.jpeg" alt="keyboard" className="w-80 mb-8 align-middle" />
+              <section id="about" className="section-class">
               <StaggeredText>
                 <p>Building   Interactive   Experiences   for   the   Web.</p>
               </StaggeredText>
+              <br />
+              <br />
+              <br />
+              <br />
               {/* <Canvas style={{ height: '500px', width: '500px' }}>
                   <PerspectiveCamera makeDefault position={[0, 0, 20]} />
                   <Cube position={sizes.cubePosition} />
@@ -184,12 +190,24 @@ export default function App() {
                   <directionalLight position={[10, 10, 10]} intensity={0.5} />
                   <OrbitControls />
               </Canvas> */}
+              <AboutH />
+              </section>
             </div>
-            <AboutH />
+            
+              
+            
             <div className="flex items-center flex-col justify-center ml-0 text-black dark:text-white">
+              <br />
+              <br />
+              <br />
+              <br />
               <StaggeredText>
-                <p>Projects </p>
+                <p className='mb-10'>PROJECTS</p>
               </StaggeredText>
+              <br />
+              <br />
+              <br />
+              <br />
             </div>
             <CarProjects />
           </div>

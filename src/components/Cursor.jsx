@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import './cursor.css';
 import { gsap } from 'gsap';
 
 const InteractiveStars = () => {
+  const [isEffectEnabled, setIsEffectEnabled] = useState(true);
   const isMobileDevice = () => typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent);
   const startRef = useRef(new Date().getTime());
   const originPosition = { x: 0, y: 0 };
@@ -31,6 +32,7 @@ const InteractiveStars = () => {
   const ms = (value) => withUnit(value, 'ms');
   
   const createStar = useCallback((position) => {
+    if (!isEffectEnabled) return;
     const star = document.createElement('div');
     const size = selectRandom(config.sizes);
     star.className = 'star';
@@ -171,6 +173,24 @@ const InteractiveStars = () => {
     };
   }, [handleOnMove]);
 
+  useEffect(() => {
+    const handleMouseEnter = () => setIsEffectEnabled(true);
+    const handleMouseLeave = () => setIsEffectEnabled(false);
+  
+    const noglowpElements = document.querySelectorAll('.noglowp');
+  
+    noglowpElements.forEach((element) => {
+      element.addEventListener('mouseenter', handleMouseEnter);
+      element.addEventListener('mouseleave', handleMouseLeave);
+    });
+  
+    return () => {
+      noglowpElements.forEach((element) => {
+        element.removeEventListener('mouseenter', handleMouseEnter);
+        element.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
+  }, []);
   return null;
 };
 

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Moon, Sun, Menu, X } from 'lucide-react'
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
+import { gsap } from 'gsap'
 import { motion } from "framer-motion"
 
 const navItems = ['Home', 'About', 'Projects', 'Contact']
 
-export default function Navbar() {
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(true)
 
@@ -23,8 +22,8 @@ export default function Navbar() {
       opacity: 0,
       filter: "blur(10px)",
       duration: 2,
-    }) // "-=1.5" means start this animation 1.5 seconds before the previous one ends
-  }, []);
+    })
+  }, [])
 
   setTimeout(() => {
     gsap.to(".navbas", { 
@@ -33,37 +32,40 @@ export default function Navbar() {
       duration: 0.5 
     });
   }, 8000);
+  
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
 
   return (
-    <nav className="bg-white dark:bg-gray-900 transition-colors duration-300 navbas ">
+    <motion.nav 
+        className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 transition-colors duration-300 navbas z-50"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 70, damping: 10 }}
+    >
       <div className="max-w-8xl bg-gray-700">
-        <div className="flex items-center mx-7 justify-between h-16 ">
+        <div className="flex items-center mx-7 justify-between h-16">
           <div className="flex-shrink-0">
             <a href="/" className="text-2xl font-bold text-gray-900 dark:text-white ">👨‍💻Coderrrrr.site</a>
           </div>
-          <div className="hidden md:flex md:flex-grow md:justify-center mx-0 "> {/* Center the links */}
-                <div className="flex space-x-4">
-                  {navItems.map((item, index) => (
-                    <Link
-                      key={index}
-                      to={`/${item.toLowerCase()}`}
-                      className="text-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-bold "
-                    >
-                      {item.toUpperCase()}
-                    </Link>
-
-                  ))}
-                </div>
+          <div className="hidden md:flex md:flex-grow md:justify-center mx-0">
+            <div className="flex space-x-4">
+              {navItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={`/#${item.toLowerCase()}`} // Anchor link
+                  className="mr-4 text-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-bold"
+                >
+                  {item.toUpperCase()}
+                </a>
+              ))}
+            </div>
           </div>
           <div className="flex items-center">
             <motion.button
               onClick={toggleDarkMode}
               whileHover={{ scale: 1.2 }}
-              onHoverStart={e => {}}
-              onHoverEnd={e => {}}
               className="p-1 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
             >
               <span className="sr-only">Toggle dark mode</span>
@@ -94,17 +96,19 @@ export default function Navbar() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item, index) => (
-              <Link
+              <a
                 key={index}
-                to={`/${item.toLowerCase()}`}
+                href={`/#${item.toLowerCase()}`} // Mobile anchor link
                 className="block text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2"
               >
                 {item}
-              </Link>
+              </a>
             ))}
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   )
 }
+
+export default Navbar;

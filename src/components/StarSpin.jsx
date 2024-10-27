@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Dark from "/dark_star.png";
+import Dark from "/react-logo.svg";
 import Light from "/light_star.png";
 import { useTheme } from "next-themes";
 
