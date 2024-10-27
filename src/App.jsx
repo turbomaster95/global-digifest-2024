@@ -114,6 +114,18 @@ export default function App() {
       })
     }
   }, [lolo]);
+  useEffect(() => {
+    // Ensure the script runs after the component mounts
+    const script = document.createElement('script');
+    script.src = '/oneko.js'; // Path to your oneko.js file
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Cleanup function to remove the script when component unmounts
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <Lenis root>
@@ -162,13 +174,13 @@ export default function App() {
               <StaggeredText>
                 <p>Building   Interactive   Experiences   for   the   Web.</p>
               </StaggeredText>
-              <Canvas style={{ height: '500px', width: '500px' }}>
+              {/* <Canvas style={{ height: '500px', width: '500px' }}>
                   <PerspectiveCamera makeDefault position={[0, 0, 20]} />
                   <Cube position={sizes.cubePosition} />
                   <ambientLight intensity={1} />
                   <directionalLight position={[10, 10, 10]} intensity={0.5} />
                   <OrbitControls />
-              </Canvas>
+              </Canvas> */}
             </div>
             <AboutH />
             <CarProjects />
