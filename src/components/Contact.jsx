@@ -2,31 +2,21 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const ContactForm = () => {
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [responseMessage, setResponseMessage] = useState(null);
 
-  const onSubmit = async (data) => {
-    setResponseMessage(null);
-    try {
-      const response = await fetch('https://api.coderrrrr.site/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  const onSubmit = (data) => {
+    const { name, email, message } = data;
+    const subject = encodeURIComponent(`Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+    const mailtoLink = `mailto:admin@coderrrrr.site?subject=${subject}&body=${body}`;
 
-      
-      if (response.ok) {
-        setResponseMessage("Your message has been sent successfully!");
-        reset();
-      } else {
-        setResponseMessage("Error: Message could not be sent.");
-      }
-    } catch (error) {
-      console.log(data);
-      setResponseMessage("Network error: please try again later.");
-    }
+    // Open the mailto link in the user's default email client
+    window.location.href = mailtoLink;
+
+    console.log(mailtoLink);
+    setResponseMessage("Your email client has been opened. Please complete your message.");
+    reset();
   };
 
   return (
@@ -65,10 +55,9 @@ const ContactForm = () => {
 
       <button
         type="submit"
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
-        disabled={isSubmitting}
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
       >
-        {isSubmitting ? "Sending..." : "Send"}
+        Send
       </button>
 
       {responseMessage && <p className="mt-4 text-center text-sm">{responseMessage}</p>}
