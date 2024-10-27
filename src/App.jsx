@@ -150,20 +150,20 @@ export default function App() {
                   pointerEvents: 'none',
                 }}
               >
-                <span className="hidden letter">C</span>
-                <span className="hidden letter">o</span>
-                <span className="hidden letter">d</span>
-                <span className="hidden letter">e</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">r</span>
-                <span className="hidden letter">.</span>
-                <span className="hidden letter">s</span>
-                <span className="hidden letter">i</span>
-                <span className="hidden letter">t</span>
-                <span className="hidden letter">e</span>
+                <span className="letter">C</span>
+                <span className="letter">o</span>
+                <span className="letter">d</span>
+                <span className="letter">e</span>
+                <span className="letter">r</span>
+                <span className="letter">r</span>
+                <span className="letter">r</span>
+                <span className="letter">r</span>
+                <span className="letter">r</span>
+                <span className="letter">.</span>
+                <span className="letter">s</span>
+                <span className="letter">i</span>
+                <span className="letter">t</span>
+                <span className="letter">e</span>
               </h1>
             )}
           </div>
