@@ -14,6 +14,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { calculateSizes } from '@/lib/const';
 import { useMediaQuery } from 'react-responsive';
+import AboutH from './components/AboutH';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -156,8 +157,8 @@ export default function App() {
           </div>
 
           <div className="content">
-            <div className="flex items-center justify-center min-h-screen text-black dark:text-white">
-              <img src="/404-poodle.png" alt="404 Poodle" className="w-80 ml-16 align-middle" />
+            <div className="flex items-center flex-col justify-center min-h-screen text-black dark:text-white">
+              <img src="/keyboard.jpeg" alt="keyboard" className="w-80 mb-8 align-middle" />
               <StaggeredText>
                 <p>Building   Interactive   Experiences   for   the   Web.</p>
               </StaggeredText>
@@ -167,10 +168,12 @@ export default function App() {
                   <ambientLight intensity={1} />
                   <directionalLight position={[10, 10, 10]} intensity={0.5} />
                   <OrbitControls />
-                </Canvas>
+              </Canvas>
             </div>
+            <AboutH />
+            <CarProjects />
           </div>
-          <CarProjects />
+          
         </div>
       </ErrorBoundary>
     </Lenis>
