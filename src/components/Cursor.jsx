@@ -63,7 +63,7 @@ const InteractiveStars = () => {
   }, []);
   
   const createClickConfetti = useCallback((position) => {
-    const confettiCount = 20; // Number of confetti pieces
+    const confettiCount = 10; // Number of confetti pieces
     for (let i = 0; i < confettiCount; i++) {
       const star = document.createElement("div");
       const size = selectRandom(config.sizes);

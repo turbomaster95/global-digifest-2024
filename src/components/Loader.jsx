@@ -70,7 +70,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
                   <StarSpin classNameSize="w-[15vw] sm:w-[12vw] lg:w-[7vw]" className="animate-spin-slow" />
                 </motion.div>
                 <motion.p
-                  initial={{ y: "100%", opacity: 1 }}
+                  initial={{ y: "300%", opacity: 1 }}
                   animate={{
                     y: 0,
                     opacity: 1,
@@ -95,7 +95,7 @@ function PreLoading({ count }) { // Removed the TypeScript type annotation for c
             ) : (
               <div key={`${nom}_${i}`} className="">
                 <motion.p
-                  initial={{ y: "100%" }}
+                  initial={{ y: "300%" }}
                   animate={{
                     y: 0,
                     transition: {

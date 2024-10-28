@@ -160,9 +160,10 @@ const ContactCard = () => {
                                     backgroundImageOpacity={0.5}
                                     showAtmosphere
                                     showGraticules
-                                    globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
-                                    bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+                                    globeImageUrl="/textures/earth-day.jpg"
+                                    bumpImageUrl="/textures/earth-topology.png"
                                     ref={globeRef}
+                                    className='rotate-12'
                                     htmlElementsData={gData}
                                     htmlElement={d => {
                                         const el = document.createElement('div');

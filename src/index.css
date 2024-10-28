@@ -17,3 +17,9 @@ body {
     padding: 0;
     height: 100%;
 }
+
+.fixed-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+}

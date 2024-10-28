@@ -1,21 +1,18 @@
 import Navbar from '@/components/Navbar';
 import ErrorBoundary from './components/ErrorBoundary';
 import { gsap } from "gsap";
-import Scene from '@/components/Scene';
+import { useGSAP } from '@gsap/react';
 import { useEffect, useState, useRef } from 'react';
 import PreLoading from '@/components/Loader';
 import StaggeredText from './components/effects/StaggeredText';
 import PopupText from './components/effects/PopupText';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { motion, useAnimation } from "framer-motion";
 import { Lenis, useLenis } from '@studio-freight/react-lenis';
 import CarProjects from './components/Carousel-Projects';
-import Cube from './components/Cube';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { calculateSizes } from '@/lib/const';
 import { useMediaQuery } from 'react-responsive';
 import AboutH from './components/AboutH';
-import InteractiveStars from './components/Cursor';
 import Footer from './components/Footer';
 import SocialLinks from './components/SocialLinks';
 import Contact from './components/Contact';
@@ -23,14 +20,36 @@ import Contact from './components/Contact';
 gsap.registerPlugin(ScrollToPlugin);
 
 export default function App() {
+  const controls = useAnimation();
   const [lolo, setLolo] = useState(false);
   const [count, setCount] = useState(10);
-  const initialTimeline = useRef(gsap.timeline({ paused: true }));
+  const initialTimeline = useRef(gsap.timeline());
   const [isPreloading, setIsPreloading] = useState(true);
   const isSmall = useMediaQuery({ maxWidth: 440 });
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
 
+  const startAnimation = async () => {
+    await controls.start("visible");
+  };
+
+  const letterVariants = {
+    hidden: {
+      y: "random([-120%, 120%])", // initial random positions
+      opacity: 0,
+      filter: "blur(10px)",
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 2,
+        ease: "easeOut",
+      },
+    },
+  };
+  
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
   useEffect(() => {
     // Update lolo state for animation after 5 seconds
@@ -41,7 +60,7 @@ export default function App() {
     return () => clearTimeout(loloTimer);
   }, []);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.to(window, {
       duration: 0.1,
       scrollTo: 0,
@@ -83,7 +102,7 @@ export default function App() {
   }, []);
 
   // Handle smooth scrolling
-  useLenis();
+  // useLenis();
 
   // // Simulate loading time
   // useEffect(() => {
@@ -94,7 +113,7 @@ export default function App() {
   //   return () => clearTimeout(preloadingTimer);
   // }, []);
 
-  useEffect(() => {
+  useGSAP(() => {
     const startAnimation = () => {
       initialTimeline.current
         .set(".letter", { className: "letter", visibility: "visible" })
@@ -141,10 +160,8 @@ export default function App() {
           <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
             <section id="home" className="section-class">
               {/* Conditional rendering based on count */}
-              {count > 0 ? (
-                console.log("✨ Preloading... ✨")
-              ) : (
-                <h1
+              {count > 0 ? 1 : (
+                <motion.h1
                   className="absolute inset-0 flex items-center hedr text-black dark:text-white"
                   style={{
                     fontSize: '16vw',
@@ -155,21 +172,21 @@ export default function App() {
                     pointerEvents: 'none',
                   }}
                 >
-                  <span className="hidden letter">C</span>
-                  <span className="hidden letter">o</span>
-                  <span className="hidden letter">d</span>
-                  <span className="hidden letter">e</span>
-                  <span className="hidden letter">r</span>
-                  <span className="hidden letter">r</span>
-                  <span className="hidden letter">r</span>
-                  <span className="hidden letter">r</span>
-                  <span className="hidden letter">r</span>
-                  <span className="hidden letter">.</span>
-                  <span className="hidden letter">s</span>
-                  <span className="hidden letter">i</span>
-                  <span className="hidden letter">t</span>
-                  <span className="hidden letter">e</span>
-                </h1>
+                  <span className="letter">C</span>
+                  <span className="letter">o</span>
+                  <span className="letter">d</span>
+                  <span className="letter">e</span>
+                  <span className="letter">r</span>
+                  <span className="letter">r</span>
+                  <span className="letter">r</span>
+                  <span className="letter">r</span>
+                  <span className="letter">r</span>
+                  <span className="letter">.</span>
+                  <span className="letter">s</span>
+                  <span className="letter">i</span>
+                  <span className="letter">t</span>
+                  <span className="letter">e</span>
+                </motion.h1>
               )}
             </section>
           </div>
@@ -203,7 +220,7 @@ export default function App() {
                 <br />
                 <br />
                 <StaggeredText>
-                  <p className='mb-10'>PROJECTS</p>
+                    <p className='mb-10'>PROJECTS</p>
                 </StaggeredText>
                 <br />
                 <br />
@@ -216,9 +233,11 @@ export default function App() {
           </section>
           <br />
           <br />
-          <Contact />
-          <SocialLinks />
-          <Footer />
+          <div className='footer relative'>
+            <Contact />
+            <SocialLinks />
+            <Footer />
+          </div>
         </div>
       </ErrorBoundary>
     </Lenis>
